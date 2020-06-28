@@ -1,3 +1,4 @@
+import unittest
 from appium import webdriver
 from .Data.global_data import *
 from .HelperFunctions.custom_functions import *
