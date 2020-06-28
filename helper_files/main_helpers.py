@@ -1,13 +1,15 @@
 import os
 import unittest
 from appium import webdriver
+from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 from appium.webdriver.common.mobileby import By
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
-from ..Data.global_data import *
+from data_files.desired_capabilities import *
+from ..data_files.global_data import *
 
 
 def click_text(self, text):
@@ -24,16 +26,18 @@ def find_by_text(self, text):
         return True
 
 
-def visible_assert(self, element):
-    self.driver.implicitly_wait(30)
+def visible_assert(method, element):
     try:
-        self.driver.find_element(element)
-        print('Element is displayed')
-        return True
-    except NoSuchElementException as e:
-        print('Element is not displayed')
+        print(method, element)
+        el = method, element
+        print(el)
+        if el:
+            return True
+        elif not el:
+            return False
+    except Exception:
+        print('problem')
         return False
-    self.driver.implicitly_wait(20)
 
 
 def search_cards(self):
