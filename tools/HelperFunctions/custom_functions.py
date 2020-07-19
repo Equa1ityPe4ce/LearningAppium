@@ -7,7 +7,7 @@ from appium.webdriver.common.mobileby import By
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
-from ..Data.global_data import *
+from ..data.global_data import *
 
 
 def click_text(self, text):
