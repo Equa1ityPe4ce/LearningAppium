@@ -8,6 +8,10 @@ from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
 from ..data.global_data import *
+from ..ex_conds import *
+import random
+import string
+
 
 
 def click_text(self, text):
@@ -35,25 +39,37 @@ def visible_assert(self, element):
         return False
     self.driver.implicitly_wait(20)
 
+def standard_search(self,search_text, list_text):
+    self.driver.implicitly_wait(20)
+    Action.element_send_text(Action,Search.search_bar, 20, search_text)
+    reddit_list = search_cards(self)
+    print(reddit_list)
+    self.assertTrue(search_any_text_in_list(list_text, reddit_list))
 
 def search_cards(self):
     self.driver.implicitly_wait(5000)
     search_list = []
-    row1xpath = ''
-    row2xpath = ''
-    xpathend = ''
+    row1xpath = '//android.widget.RelativeLayout['
+    xpathend = ']/android.widget.TextView[1]'
     for index in range(1, 50):
         path1 = f"{row1xpath}{index}{xpathend}"
-        path2 = f"{row2xpath}{index}{xpathend}"
         self.driver.implicitly_wait(1)
         if len(self.driver.find_elements(By.XPATH, path1)) > 0:
             self.driver.implicitly_wait(1)
             search_list.append(self.driver.find_element_by_xpath(f"{row1xpath}{index}{xpathend}").text)
-            if len(self.driver.find_elements(By.XPATH, path2)) > 0:
-                search_list.append(self.driver.find_element_by_xpath(f"{row2xpath}{index}{xpathend}").text)
         else:
             break
     return search_list
+
+
+
+def get_random_letters(self):
+    letters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+    random_string = []
+    random_string = ''.join(random.choice(letters) for i in range(2))
+    return random_string
+
+
 
 
 def search_any_text_in_list(text, results_in_list):
