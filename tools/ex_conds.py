@@ -24,3 +24,7 @@ class Action(ResetCapabilities):
 
     def element_has_text(self, locator, timeout, text):
         element = WebDriverWait(self.driver, timeout).until(ex_cond.text_to_be_present_in_element(locator, text))
+
+    def element_send_text(self,locator,timeout,text):
+        element = WebDriverWait(self.driver, timeout).until(ex_cond.element_to_be_clickable(locator)).send_keys(text)
+
